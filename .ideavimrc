@@ -1,2 +1,4 @@
 set relativenumber
 set number
+set scrolloff=12
+
