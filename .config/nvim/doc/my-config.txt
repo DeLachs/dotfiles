@@ -1,0 +1,24 @@
+================================================================================
+SHORT DOCUMENTATION                                                  *my-config*
+
+The Basic Keybindings that I always forget are:
+
+OPEN TODOS
+
+<leader>q       For a todo overview on the bottom.
+<leader>qt      For a todo search with telescope.
+
+NVIM-TREE HELP
+
+g?              Is inside of the nvim-tree field used for the help window.
+
+EXIT TELESCOPE
+
+Esc             To exit while not in insert mode.
+<C-c>           To exit while in insert mode.
+
+EXIT CODEACTIONS
+
+q               Yes... I should get this right...
+
+vim:tw=78:ts=8:ft=help:norl:

@@ -1,48 +1,82 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+-- setup lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
+-- load lazy and plugins list
+require("lazy").setup({
+  -- theme
+  "navarasu/onedark.nvim",
+  -- statusline
+  "nvim-lualine/lualine.nvim",
+  -- indent lines and functions markers
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
+  -- gitsigns
+  { "lewis6991/gitsigns.nvim", opts = {} },
+  -- colored comments (
+  --    PERF: fully optimised
+  --    HACK: hmmm, this looks a bit funky
+  --    TODO: what else?
+  --    NOTE: adding a note
+  --    FIX: this needs fixing
+  --    WARNING: ???
+  --    TEST: test
+  -- )
+  { "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  -- file tree to the left like in vs code
+  "nvim-tree/nvim-tree.lua",
+  "nvim-tree/nvim-web-devicons",
+  -- code highlighting
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  -- rainbow delimiters
+  "HiPhish/rainbow-delimiters.nvim",
+  -- telescope search
+  { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim"} },
 
-local packer_bootstrap = ensure_packer()
+  -- lsp
+  {
+    -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      { 'williamboman/mason.nvim', config = true },
+      'williamboman/mason-lspconfig.nvim',
 
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  -- My plugins here
-  use 'navarasu/onedark.nvim'
-  use 'christoomey/vim-tmux-navigator'
-  use 'nvim-tree/nvim-tree.lua'
-  use 'nvim-tree/nvim-web-devicons'
-  use 'nvim-lualine/lualine.nvim'
-  use 'nvim-treesitter/nvim-treesitter'
-  use 'lewis6991/gitsigns.nvim'
-  -- use 'tpope/vim-commentary'
-  -- completion
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'rafamadriz/friendly-snippets'
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'neovim/nvim-lspconfig'
-  use 'glepnir/lspsaga.nvim'
-  use {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.0',
-    requires = { { 'nvim-lua/plenary.nvim'} }
-  }
-  -- rust
-  use 'simrat39/rust-tools.nvim'
+      -- Useful status updates for LSP
+      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+      { 'j-hui/fidget.nvim', opts = {} },
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+      -- Additional lua configuration, makes nvim stuff amazing!
+      'folke/neodev.nvim',
+      -- lspsaga for code actions
+      "nvimdev/lspsaga.nvim",
+    },
+  },
+  -- autocompletion
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      -- Snippet Engine & its associated nvim-cmp source
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+
+      -- Adds LSP completion capabilities
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+
+      -- Adds a number of user-friendly snippets
+      'rafamadriz/friendly-snippets',
+    },
+  },
+})
+
