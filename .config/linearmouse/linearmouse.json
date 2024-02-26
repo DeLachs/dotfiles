@@ -45,22 +45,6 @@
           }
         ]
       }
-    },
-    {
-      "if" : {
-        "app" : "com.moonlight-stream.Moonlight",
-        "device" : {
-          "productName" : "Wired Gaming Mouse",
-          "category" : "mouse",
-          "productID" : "0x36",
-          "vendorID" : "0x258a"
-        }
-      },
-      "scrolling" : {
-        "acceleration" : 1,
-        "distance" : 3,
-        "speed" : 0
-      }
     }
   ],
   "$schema" : "https:\/\/schema.linearmouse.app\/0.9.5"
