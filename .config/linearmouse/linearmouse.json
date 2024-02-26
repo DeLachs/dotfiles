@@ -1,0 +1,67 @@
+{
+  "schemes" : [
+    {
+      "if" : {
+        "device" : {
+          "productID" : "0x36",
+          "category" : "mouse",
+          "vendorID" : "0x258a",
+          "productName" : "Wired Gaming Mouse"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "vertical" : 1
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "speed" : {
+          "vertical" : 0
+        }
+      },
+      "pointer" : {
+        "disableAcceleration" : false,
+        "speed" : 0.2875
+      },
+      "buttons" : {
+        "universalBackForward" : false,
+        "mappings" : [
+          {
+            "button" : 3,
+            "command" : false,
+            "option" : false,
+            "action" : "missionControl.spaceLeft",
+            "control" : false,
+            "shift" : false
+          },
+          {
+            "button" : 4,
+            "option" : false,
+            "shift" : false,
+            "command" : false,
+            "control" : false,
+            "action" : "missionControl.spaceRight"
+          }
+        ]
+      }
+    },
+    {
+      "if" : {
+        "app" : "com.moonlight-stream.Moonlight",
+        "device" : {
+          "productName" : "Wired Gaming Mouse",
+          "category" : "mouse",
+          "productID" : "0x36",
+          "vendorID" : "0x258a"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : 1,
+        "distance" : 3,
+        "speed" : 0
+      }
+    }
+  ],
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.9.5"
+}
