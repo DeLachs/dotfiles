@@ -14,6 +14,12 @@
     "metrics": false
   },
   "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_multiline_find": false
+  },
+  "relative_line_numbers": true,
+  "vertical_scroll_margin": 12,
   "ui_font_size": 16,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "buffer_font_size": 16,
